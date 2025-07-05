@@ -13,8 +13,13 @@ export function checkout(cart, customer) {
   }
 
   console.log('** Checkout receipt **');
+  console.log('Qty\tProduct\t\tPrice\tWeight(g)\tExpired');
   for (const item of cart.getItems()) {
-    console.log(`${item.quantity}x ${item.product.getName()}\t${item.product.price * item.quantity}`);
+    const name = item.product.getName();
+    const price = item.product.price * item.quantity;
+    const weight = item.product.getWeight() * item.quantity;
+    const expired = item.product.isExpired() ? 'Yes' : 'No';
+    console.log(`${item.quantity}\t${name}\t\t${price}\t${weight}\t${expired}`);
   }
   console.log('----------------------');
   console.log(`Subtotal\t${subtotal}`);
